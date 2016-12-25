@@ -46,13 +46,18 @@ call s:Default('excluded', [
       \ ])
 call s:Default('exclude_readonly', 1)
 call s:Default('highlight_one_column', 0)
-
+call s:Default('explicit_include', [])
 
 function! s:ShouldBeDisabled()
   " buftype is 'terminal' in :terminal buffers in NeoVim
-  return (index(g:lengthmatters_excluded, &ft) >= 0) || &buftype == 'terminal'
+  if &buftype == 'terminal' || index(g:lengthmatters_excluded, &ft) >= 0
+    return 1
+  endif
+  if exists('g:lengthmatters_explicit_include')
+    return index(g:lengthmatters_explicit_include, &ft) < 0
+  endif
+  return 0
 endfunction
-
 
 " Enable the highlighting (if the filetype is not an excluded ft). Reuse the
 " match of the current buffer if available, unless the textwidth has changed. If
