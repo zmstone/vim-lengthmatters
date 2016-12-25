@@ -95,10 +95,10 @@ endfunction
 function! s:Disable()
   let w:lengthmatters_active = 0
 
-  if exists('w:lengthmatters_match')
-    call matchdelete(w:lengthmatters_match)
-    unlet w:lengthmatters_match
-  endif
+"  if exists('w:lengthmatters_match')
+"    call matchdelete(w:lengthmatters_match)
+"    unlet w:lengthmatters_match
+"  endif
 endfunction
 
 
